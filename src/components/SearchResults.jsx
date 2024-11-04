@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiChevronRight, FiX } from 'react-icons/fi';
 
-function SearchResults({ answer, contexts, questions, onSearch }) {
+function SearchResults({ answer, contexts, questions, onSearch, isLatest }) {
   const [showAllSources, setShowAllSources] = useState(false);
 
   // Take first 3 sources for preview cards
@@ -9,23 +9,29 @@ function SearchResults({ answer, contexts, questions, onSearch }) {
   const remainingSources = contexts.slice(3);
 
   const handleCitationClick = (citationNumber) => {
-    const index = citationNumber - 1;
-    if (contexts[index]?.url) {
-      window.open(contexts[index].url, '_blank', 'noopener,noreferrer');
+    const source = contexts.find((source, index) => index + 1 === citationNumber);
+    if (source?.url) {
+      window.open(source.url, '_blank');
     }
   };
 
   const renderAnswerWithCitations = (text) => {
-    const parts = text.split(/(\[\d+\])/g);
+    // Split by citation pattern including the brackets
+    const parts = text.split(/(\[citation:\d+\])/);
+    
     return parts.map((part, index) => {
-      const citationMatch = part.match(/\[(\d+)\]/);
+      // Match citation number including brackets
+      const citationMatch = part.match(/\[citation:(\d+)\]/);
       if (citationMatch) {
         const citationNumber = parseInt(citationMatch[1]);
         return (
           <button
             key={index}
             onClick={() => handleCitationClick(citationNumber)}
-            className="inline-flex items-center justify-center w-5 h-5 text-xs font-medium rounded-full bg-blue-100 text-blue-600 hover:bg-blue-200 mx-1"
+            className="inline-flex items-center px-1.5 py-0.5 rounded-md text-xs font-medium 
+              bg-blue-50 text-blue-600 hover:bg-blue-100 
+              dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50 
+              transition-colors mx-1"
           >
             {citationNumber}
           </button>
@@ -54,14 +60,42 @@ function SearchResults({ answer, contexts, questions, onSearch }) {
     ));
   };
 
+  // Function to extract image URL from snippet or metadata
+  const getImagePreview = (source) => {
+    // Try to find an image URL in the snippet using regex
+    const imageMatch = source.snippet.match(/(https?:\/\/[^/]+\/[^/\s]+\.(jpg|jpeg|png|gif))/i);
+    if (imageMatch) return imageMatch[0];
+
+    // If no image found, generate a preview using a service like OpenGraph.io or similar
+    return `https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${encodeURIComponent(source.url)}&size=128`;
+  };
+
+  // Function to get favicon
+  const getFavicon = (url) => {
+    try {
+      const domain = new URL(url).hostname;
+      return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
+    } catch {
+      return null;
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Sources Preview Row */}
       <div className="grid grid-cols-4 gap-4">
         {previewSources.map((source, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="aspect-video bg-gray-100">
-              {/* Image preview placeholder */}
+            <div className="aspect-video bg-gray-100 relative overflow-hidden">
+              <img
+                src={getImagePreview(source)}
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = 'https://via.placeholder.com/400x225?text=No+Preview';
+                }}
+              />
             </div>
             <div className="p-4">
               <a
@@ -73,6 +107,12 @@ function SearchResults({ answer, contexts, questions, onSearch }) {
                 {source.name}
               </a>
               <div className="mt-2 flex items-center text-xs text-gray-500">
+                <img
+                  src={getFavicon(source.url)}
+                  alt=""
+                  className="w-4 h-4 mr-2"
+                  onError={(e) => e.target.style.display = 'none'}
+                />
                 <span className="truncate">{new URL(source.url).hostname}</span>
               </div>
             </div>
