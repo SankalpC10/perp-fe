@@ -27,7 +27,7 @@ function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://s3rppyxoknlyirwlqflmjepnfi0hhmbr.lambda-url.ap-south-1.on.aws/search?query=${encodeURIComponent(query)}`, {
+      const response = await fetch(`https://yanuhc6pvw7pypndbwpkifexrq0oubxe.lambda-url.ap-south-1.on.aws/search?query=${encodeURIComponent(query)}`, {
         method: 'POST',
         headers: {
           'accept': 'application/json',
