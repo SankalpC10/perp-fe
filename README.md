@@ -1,70 +1,117 @@
-# Getting Started with Create React App
+# AI Chat Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, Perplexity AI-inspired chat interface that supports threaded conversations, citations, and dark mode.
 
-## Available Scripts
+## 🌟 Features
 
-In the project directory, you can run:
+- **Thread-based Conversations**: Organize chats into separate threads for better context management
+- **Citation System**: Interactive citation buttons similar to Perplexity AI
+- **Dark Mode Support**: Full dark mode implementation with system preference detection
+- **Responsive Design**: Works seamlessly across desktop and mobile devices
+- **Modern UI**: Clean, minimal interface with smooth transitions
 
-### `npm start`
+## 🏗️ Technical Architecture
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Core Technologies
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: React.js with TypeScript
+- **Styling**: Tailwind CSS for utility-first styling
+- **State Management**: React Context API for global state
+- **Package Management**: npm/yarn
+- **Build Tool**: Vite
 
-### `npm test`
+### Key Dependencies
+- react
+- react-dom
+- date-fns
+- uuid
+- tailwindcss
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## 💡 Design Decisions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Thread Management
+- **Why Context API?**: Chosen for its simplicity and built-in React integration
+- **Thread Structure**: Each thread contains:
+  - Unique ID
+  - Query
+  - Answer
+  - Citations
+  - Timestamp
+  - Active status
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Citation System
+- **Implementation**: Inline citation buttons with number references
+- **Styling**: Matches Perplexity AI's minimal, clean design
+- **Interaction**: Click to highlight referenced source
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Dark Mode
+- **Implementation**: Tailwind's dark mode with `class` strategy
+- **Storage**: User preference persisted in localStorage
+- **Colors**: Carefully chosen for accessibility and contrast
 
-### `npm run eject`
+### 4. State Management Choices
+- **Local State**: Used for component-specific UI states
+- **Context API**: Used for:
+  - Thread management
+  - Theme preferences
+  - Global application state
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Installation**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+git clone https://github.com/SankalpC10/perp-fe.git
+npm install
+npm start
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🎨 Styling Guidelines
 
-## Learn More
+### Color Palette
+- **Light Mode**
+  - Primary: Blue (#2563eb)
+  - Background: White (#FFFFFF)
+  - Text: Gray-900 (#111827)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Dark Mode**
+  - Primary: Blue-400 (#60A5FA)
+  - Background: Dark-base (#0F0F0F)
+  - Text: Gray-100 (#F3F4F6)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Component Design
+- Consistent padding/margin (4, 8, 16, 24px)
+- Rounded corners (border-radius: 8px)
+- Smooth transitions (150ms duration)
 
-### Code Splitting
+## 🔍 Best Practices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Code Organization**
+   - Component-based architecture
+   - Separation of concerns
+   - TypeScript for type safety
 
-### Analyzing the Bundle Size
+2. **Performance**
+   - Lazy loading for large components
+   - Memoization of expensive calculations
+   - Optimized re-renders
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. **Accessibility**
+   - ARIA labels
+   - Keyboard navigation
+   - Color contrast compliance
 
-### Making a Progressive Web App
+## 🛠️ Future Improvements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Features**
+   - Message threading within conversations
+   - Export conversation history
+   - Rich text formatting support
+   - Image/file attachment support
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Technical**
+   - Add end-to-end testing
+   - Implement error boundary
+   - Add analytics tracking
+   - Improve performance monitoring
