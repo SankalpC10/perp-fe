@@ -83,7 +83,7 @@ function SearchResults({ answer, contexts, questions, onSearch, isLatest }) {
   return (
     <div className="space-y-6">
       {/* Sources Preview Row */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {previewSources.map((source, index) => (
           <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="aspect-video bg-gray-100 relative overflow-hidden">
@@ -120,7 +120,7 @@ function SearchResults({ answer, contexts, questions, onSearch, isLatest }) {
         ))}
 
         {/* Additional Sources Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 hidden lg:block">
           <div className="p-4 space-y-4">
             {remainingSources.slice(0, 2).map((source, index) => (
               <a
@@ -166,7 +166,7 @@ function SearchResults({ answer, contexts, questions, onSearch, isLatest }) {
       {/* All Sources Sidebar */}
       {showAllSources && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
-          <div className="absolute inset-y-0 right-0 w-96 bg-white shadow-xl">
+          <div className="absolute inset-y-0 right-0 w-full sm:w-96 bg-white shadow-xl">
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-semibold">All Sources</h2>

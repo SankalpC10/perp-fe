@@ -9,8 +9,8 @@ function FollowUpQuestions({ questions }) {
     : questions.split('\n').filter(q => q.trim());
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+    <div className="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-200">
+      <h2 className="text-lg font-semibold text-white-900 mb-4 flex items-center">
         <FiHelpCircle className="mr-2" />
         Follow-up Questions
       </h2>
