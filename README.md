@@ -4,7 +4,7 @@ A modern, Perplexity AI-inspired chat interface that supports threaded conversat
 
 ## 🌟 Features
 
-- **Thread-based Conversations**: Organize chats into separate threads for better context management
+- **Thread Communication**: AI Powered search engine with citations and related questions
 - **Citation System**: Interactive citation buttons similar to Perplexity AI
 - **Dark Mode Support**: Full dark mode implementation with system preference detection
 - **Responsive Design**: Works seamlessly across desktop and mobile devices
@@ -115,3 +115,5 @@ npm start
    - Implement error boundary
    - Add analytics tracking
    - Improve performance monitoring
+
+- **Thread-based Conversations**: Organize chats into separate threads for better context management
