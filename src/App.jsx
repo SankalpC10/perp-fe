@@ -8,12 +8,11 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Check if user prefers dark mode
+    // dark mode
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       document.documentElement.classList.add('dark')
     }
     
-    // Optional: Listen for changes in system dark mode preference
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
       if (event.matches) {
         document.documentElement.classList.add('dark')
